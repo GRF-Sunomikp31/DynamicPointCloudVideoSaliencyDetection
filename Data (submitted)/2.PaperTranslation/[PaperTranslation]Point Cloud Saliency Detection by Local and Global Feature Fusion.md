@@ -61,7 +61,7 @@
 
 在本文中，我们专注于 3D  点云的显著检测；为了解决这个问题，我们考虑了局部独特性和全局稀有性，这是心理学证据支持的人类视觉系统的两个基本特征[19]；由于这两个特征在二维显著性检测中取得了令人满意的结果，我们利用它们来改进点云的显著性检测；图2展示了提出的框架，首先评估每个点的局部特征，捕捉耳朵和鼻子的轮廓等局部显著特征，然后全局稀有度找到更大的显著区域，例如整个耳朵，最后，提出了一种优化框架，将局部独特性和全局稀有度值结合起来，以获得点云的最终显著性检测结果。
 
-![2](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\2.png)
+![2](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/2.png)
 
 > 图 2.  算法框架；首先评估每个点的局部独特性，然后将点云分解为若干个簇，得到每个点的全局稀有度值，最后，提出了一种优化框架，将局部独特性和全局稀有性值结合起来，以获得点云中每个点的最终显著性值
 >
@@ -72,30 +72,30 @@
 
 为了计算查询点 p<sub>i</sub>∈ P 的 FPFH 描述符，其中 P 表示点云，选择其在半径为 r 的球体中的 k 个相邻点，并使用 Darboux uvn 框架 (u  = n<sub>i</sub>, v = (p<sub>j</sub> - p<sub>i</sub>)× u, w = u ×v) 定义如下 [23]：
 
-![1.1](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.1.png)
+![1.1](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.1.png)
 
 其中 p<sub>j</sub>是属于点 p<sub>i</sub> 的 k 邻域的点。
 
 使用上述量化的角度，可以计算查询点与其相邻之间的关系，称为简化点特征直方图（SPFH）[23]，稍后对于每个查询点，SPFH 值用于获取该点的最终 FPFH  描述符，指定为：
 
-![1.2](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.2.png)
+![1.2](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.2.png)
 
 其中 k 是点 p<sub>i</sub> 的最近邻点数，|| · ||表示给定度量空间中点 p<sub>i</sub>和 k 最近邻点p<sub>j</sub>之间的 L2 距离，如 [23] 中所述。
 
 由于 3D 点云中噪声和不同采样密度的影响，欧几里得距离不适用于测量两点之间的相异性。按照[1]中的方法，使用卡方距离来衡量点之间的相异性。给定P中两个点 p<sub>i</sub>和 p<sub>j</sub>，卡方距离 χ2(p<sub>i</sub>, p<sub>j</sub>) 计算为： 
 
-![1.3](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.3.png)
+![1.3](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.3.png)
 
 其中 N 表示 FPFH 描述符中的 bin 数量。
 
 由于点 p<sub>i</sub> 与其周围点不同，则它是不同的，因此局部不同性可以定义为与其周围点的不同点的加权和,公式定义为：
-![1.4](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.4.png)
+![1.4](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.4.png)
 
 其中 D(p<sub>i</sub> ) 表示点 p<sub>i</sub>  的局部区别值，R 是点 p<sub>i</sub>  考虑的周围点的数量；注意R是根据点云的采样密度设置的。
 
 为了防止标记过多的不同点，等式（5）中设计了一个简单但有效的分段抑制函数来减少不同点的数量；
 
-![1.5](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.5.png)
+![1.5](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.5.png)
 
 其中 F(p<sub>i</sub> ) 表示点 p<sub>i</sub> 的放大局部区别值，h 表示控制要抑制的不同点范围的阈值。在我们的实验中，我们使用了一个自适应阈值 h，它等于点云中前 20%  的局部区别值；我们使用这个阈值是因为与其他阈值相比，它可以获得更好的局部区别计算结果，并且图像显著性检测中的许多其他算法也使用了这个阈值，例如 Borji  [54] 和 Kanan 等人提出的算法 [30]。
 
@@ -105,7 +105,7 @@
 
 为了表征每个簇的几何特征，为簇 ci 定义了平均 FPFH 描述符 F P F H ( c<sub>i</sub>)。请注意，F P F H (c<sub>i</sub>) 是簇 c<sub>i</sub>中所有点的 FPFH  描述符的平均值；由于全局稀有度被认为是一个区域在整个点云上发生的概率的倒数[22]，因此通过考虑每个集群的不同权重，以下计算集群 c<sub>i</sub> 的初始全局稀有度：
 
-![1.6](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.6.png)
+![1.6](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.6.png)
 
 其中 G(c<sub>i</sub>) 是簇 c<sub>i</sub>的初始全局稀有度值，N 是点云中的簇数，||c<sub>i</sub> − c<sub>j</sub> ||表示集群 c<sub>i</sub> 和 c<sub>j</sub> 的中心之间的 L2  距离。请注意，卡方距离 χ 2(c<sub>i</sub> , c<sub>j</sub> ) 是使用 Eqn 计算的 (3)。
 
@@ -113,14 +113,14 @@
 
 随机游走是一种算法，它计算从每个未播种点（unseeded point）开始的随机游走者首先到达每个播种点（ seeded points）的概率，并将预定义的值分配给具有最大概率的未播种点；它广泛应用于图像分割、图像显著性检测等图像处理领域；受 [56]  的启发，该方法使用随机游走排序方法将先验显著性估计引入图像中的每个像素，我们将随机游走排序算法应用于所提出的方法，以帮助将集群级全局稀有度引入点级全局稀有度通过考虑每个点的局部几何特征，对所有簇中的每个点进行计算；请注意，此引入过程与某些图像处理算法（例如  [57]、[58]）中使用的二值化方法完全不同，二值化方法的工作原理类似于优化框架，有助于在突出显著区域的同时消除非显著区域，相反，此过程通过计算其首先到达每个播种点的概率来帮助将全局稀有度值分配给每个未播种点；图3显示了使用随机游走排名算法对所有集群中的每个点进行集群级全局稀有性细化的示例；模型（a）表示初始集群级全局使用方程式（6）中的公式计算的稀有度结果；模型 (b) 显示了使用随机游走排名方法获得的点级全局稀有度细化；与模型（a）相比，模型（b）的视觉效果更好，牛的嘴角等模型细节得到了更好的保留，同时有效地消除了对牛身体的不准确检测结果。
 
-![3](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\3.png)
+![3](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/3.png)
 
 > 图 3. 初始 (a) 集群级全局稀有度结果与 (b) 使用随机游走排序方法获得的点级全局稀有度细化结果的比较
 >
 
 使用为方程式（6）中的每个集群计算的初始全局稀有度值  ，我们可以将点云中的一些簇根据它们的簇级全局稀有度值标记为显著簇或非显著簇；请注意，由于一个簇包含许多点，因此最接近显著或非显著簇中心的点将被标记为显著或非显著播种点，以便在所提出的算法中进行后续计算；例如，如果一个簇的全局稀有度值高于阈值  th<sub>1</sub> 或低于阈值 th<sub>2</sub>，则最靠近该簇中心的点将被标记为显著播种点或非显著播种点，而属于该簇的其他点集群将被标记为未播种点；对于全局稀有度值既不高于阈值  th<sub>1</sub> 也不低于阈值  th<sub>2</sub>的簇，簇中的所有点将被分类为非播种点；所提出算法中使用的  th<sub>1</sub> 和 th<sub>2</sub> 的阈值描述为：
 
-![1.7](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.7.png)
+![1.7](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.7.png)
 
  其中$$ \Delta $$ = 最大值（G） - 平均值（G）。
 
@@ -130,19 +130,19 @@
 
 点 p<sub>i</sub>和 k 最近邻点 p<sub>j</sub> 之间的连接通过使用每个点的局部几何特征计算的权重矩阵来量化，如公式(8)所示：
 
-![1.8](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.8.png)
+![1.8](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.8.png)
 
 其中 wij 表示点 p<sub>i</sub>和  p<sub>j</sub> 之间的连接； σ<sub>1</sub>是一个控制常数，在我们的实验中设置为 3.7；请注意，在所提出的方法中，由 FPFH  描述符表示的每个点的局部几何特征用于计算权重矩阵，这与在 2D 图像中使用 CIELab 颜色描述符 [56]  不同；在构建权重矩阵之后，可以进一步构建拉普拉斯矩阵 L，如 [56] 中所述。$$p^{s}$$
 
 令$$p^{s}$$ 表示属于类 s 的点的概率向量，它由两个子集$$p^{s}_u$$和$$p^{s}_{seeds}$$ 组成； $$p^{s}_u$$表示未播种点的概率向量，而 Ps seeds显示点云中的播种点，固定值为 0 或 1；优化的 $$p^{s}$$ 可以通过最小化 Dirichlet 积分来实现 [56]；按照 [61]  中提出的方法，添加了方程（9）中的拟合约束，以帮助将 Dirichlet 积分限制为接近初始集群级全局稀有度值。
 
-![1.9](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.9.png)
+![1.9](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.9.png)
 
 其中 η 是控制参数，Y 表示继承初始集群级全局稀有度值的逐点指示向量；
 
 通过将 Dir[p<sup>s</sup>] 相对于$$p^{s}_u$$的微分设置为零，除播种点之外的所有簇中的点的 Psu 优化解可以计算为 [61]：
 
-![1.10](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.10.png)
+![1.10](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.10.png)
 
 使用上面提到的随机游走排序方法，我们通过考虑每个点的局部几何特征，对所有簇中的每个点引入初始簇级全局稀有性细化。
 
@@ -152,7 +152,7 @@
 
 受 [66] 中提出的方法的启发，我们将集成不同显著性线索的问题建模为点云中所有点的显著性值的优化；方程（11）中的损失函数将显著点值 1 和非显著点值 0  分配给损失函数，因为人类视觉系统倾向于将项目组合在一起并获得统一的显著性检测结果[ 67]，而不是孤立的突出点；
 
-![1.11](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.11.png)
+![1.11](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.11.png)
 
 其中 Z ∈ {F, G} 与 Z1(p<sub>i</sub>) 表示放大的局部区别值 F(p<sub>i</sub>)，Z2(p<sub>i</sub>) 表示点级全局稀有度细化 G(p<sub>i</sub>)。 N 等于点云中点的个数，R  表示点p<sub>i</sub> 的相邻点；注意，在实际操作中分母可能等于0，所以如果F(p<sub>i</sub>)和G(p<sub>i</sub>)的值接近于0，则在F(p<sub>i</sub>)和G(p<sub>i</sub>)上加上一个小的常数0.1。
 
@@ -160,7 +160,7 @@
 
 损失函数中的权重系数W<sub>ij</sub>表示k最近邻点p<sub>j</sub>对点p<sub>i</sub>的加权影响，定义为：
 
-![1.12](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.12.png)
+![1.12](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.12.png)
 
 其中 σ<sub>2</sub> 是控制常数，设置为 0.02 和 || · ||是点 p<sub>i</sub>和 p<sub>j</sub>之间的 L2 距离。
 
@@ -174,7 +174,7 @@
 
 所提出的方法与[25]、[62]中提出的基于点云的算法、[11]、[63]中提出的基于网格的算法以及[64]中收集的地面实况数据的比较显示在图 4，从图中可以看出，[25]中提出的方法在检测章鱼末端等显著区域时更有用，但在章鱼身体和手掌处失败，这可能是由于使用欧几里得空间进行聚类，导致平面上的聚类描述符发生了显著变化；[62]中提出的方法产生了相当正确的显著性结果，但也突出了一些非显著区域，例如泰迪模型的轮廓和手掌；[63]中提出的方法在花瓶模型上捕获了良好的显著性检测结果，但未能检测到人体模型上的显著性区域，这可能是由背景查询的选择引起的，因为胸部的补丁彼此非常相似，如果选择属于这些区域的一个补丁作为背景，则与所选补丁相关性较高的其他补丁更有可能被视为背景；对于[11]中提出的方法，它可以很好地检测显著区域，但更有可能提供具有不同显著值的相似区域，这可能是由于模型缺乏空间对称性；与上述方法相比，该方法的显著性检测结果更加一致，并且在大多数情况下可以检测到模型的更好的显著区域，例如 Igea 模型在人体模型的面部以及四肢和胸部，然而，所提出的算法还需要进一步改进，因为它经常无法检测到圆柱形状的正确显著区域，例如椅子模型的腿和章鱼模型的脚。
 
-![4](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\4.png)
+![4](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/4.png)
 
 > 图 4  不同显著性检测结果对比从上到下：使用所提出的方法计算的显著性检测结果，[25]和[62]中报道的基于点云的显著性检测结果，[11]，[63]中报道的基于网格的显著性检测结果和groundtruth[64]中报告的模型；请注意，蓝色表示低显著值，红色表示高显著值
 >
@@ -183,7 +183,7 @@
 
 为了更好地说明局部独特性和全局稀有性特征的有效性，我们进行了消融研究，我们报告了仅使用局部独特性特征或全局稀有性特征来帮助点云显著性检测的结果；此外，我们还提供了使用线性组合和提出的优化框架之间的比较，以显示使用优化框架更好的集成结果；图5显示了仅使用局部显著性特征和全局稀有性特征的显著性检测结果，以及使用线性组合和提出的优化框架的集成结果。
 
-![5](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\5.png)
+![5](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/5.png)
 
 > 图 5 使用不同特征和不同集成算法的显著性检测结果； (a) 列显示使用局部显著性特征的显著性检测结果，而 (b) 列表示使用全局稀有性特征的显著性检测结果； (c) 列显示了使用线性组合的显著性整合结果；(d) 列显示了使用建议的优化框架的显著性整合结果； (e) 列展示了 [64] 中报告的模型的 groundtruth
 >
@@ -192,7 +192,7 @@
 
 除了定性分析外，我们还提供定量评估以使说明更加清晰。我们首先使用[71]中提出的显著性误差（SE）来帮助评估。这个指标非常直观，较低的SE代表更好的显著性检测结果。该指标定义为：
 
-![1.0](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.0.png)
+![1.0](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.0.png)
 
 其中 N 表示模型中点的总数，而 S(i) 表示使用算法计算的点 i 的归一化显著值，S<sub>gt</sub>(i) 是 [64] 中报告的归一化 Schelling  分布值，用作groundtruth。
 
@@ -200,7 +200,7 @@
 
 根据表1所提出的优化框架在所有四个模型中取得了最低的 SE  分数。在海豚模型和茶壶模型中，优化框架也获得了最高的CC分数。对于Man模型和Igea模型，CC分数排名第三位，但分别非常接近 0.22 和 0.30。这可能是因为这两个模型的局部区分度结果很不理想，使得优化框架很难获得更好的CC分数。
 
-![2.1](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\2.1.png)
+![2.1](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/2.1.png)
 
 > 表1：消融研究中的定量评估
 >
@@ -211,7 +211,7 @@
 
 ​	1）假负误差：令 G 表示模型 M 的真实点；对于兴趣点 g ∈ G，点 g 的测地线邻域计算为：
 
-![1.13](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.13.png)
+![1.13](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.13.png)
 
 其中 d(g, p) 表示点 g 和点 p 之间的测地距离，而 r 表示测地线邻域的半径。
 
@@ -223,34 +223,34 @@
 
 ​	4)
 
-![1.14](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.14.png)
+![1.14](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.14.png)
 
 和：
 
-![1.15](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.15.png)
+![1.15](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.15.png)
 
 其中 g<sub>i</sub>  属于ground-truth点。
 
 FNE、FPE 和 WME 都是介于 0 和 1 之间的度量；算法执行的 FNE、FPE 和 WME  越低，该算法在兴趣点检测方面的性能越好。
 
-![6](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\6.png)
+![6](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/6.png)
 
 > 图 6. 使用 FNE、FPE 和 WME 在兴趣点检测基准上评估我们的算法与其他兴趣点检测方法的性能的比较结果。前三图为数据集 A 的评估结果，后三图为数据集  B 的评估结果。不同颜色的线表示每种兴趣点检测算法对 groundtruth 兴趣点的评估分数，σ = 0.03 和 n = 8。
 >
 
 在 [25] 和 [1] 之后，我们的兴趣点被定义为阈值上的局部最大值，该阈值被计算为所有局部最大值的平均值；图 6 展示了我们的方法对使用 FNE、FP E 和 WME 随着半径 r 增加的兴趣点检测基准的评估结果，并与 [76] 中提到的其他六种兴趣点检测算法进行了比较；根据图 6，与其他方法相比，基于  HKS [73] 的方法的 FPE显著降低，因为基于 HKS [73] 的兴趣点检测方法发现的兴趣点非常少，但精度更高；图 6  中的结果还表明，我们的方法比除 HKS [73] 之外的其他方法实现了更低的 FPE，而 FNE 略高于某些方法，但在这两种方法中仍然与 3D-SIFT  [74] 算法相当两个数据集，由于一种方法很难同时实现较低的 FPE 和较低的 FNE，因此假阳性和假阴性值之间的平衡需要量化；根据[25]，我们使用以下公式量化余额：
 
-![1.16](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.16.png)
+![1.16](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.16.png)
 
 其中 (1−FPE) 表示精度， (1−FNE) 是召回率； F<sub>β</sub>  表示 FPE和 FNE 之间的量化平衡，β  用作准确率和召回率之间的权重系数。
 
 使用等式（16）中的公式，我们计算了前面提到的所有兴趣点检测方法的量化平衡值；量化的余额值如表2所示，根据表2、还可以观察到，当召回率与精度同等重要时，HKS算法的性能最好，而当召回率是精度和容差半径的两倍时，所提算法的实验值最好；数据集 A 设置为 r = 0.06 和 r = 0.09，数据集 B 设置为 r = 0.09；虽然 HKS  算法取得了相当令人满意的结果，但其代价是较高的假阴性错误和加权未命中错误，这可能不是适用于一些需要较高召回率的应用；除了进行兴趣点检测评估外，图 7  提供了该方法和其他算法获得的兴趣点检测结果示例，与 [25] 中报告的基于聚类显著性的兴趣点检测结果相比，提出的方法检测膝盖处更好的兴趣点和Armadillo模型的故事。
 
-![2.2](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\2.2.png)
+![2.2](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/2.2.png)
 
 > ​		表2.兴趣点检测的 F<sub>β</sub>  值
 
-![7](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\7.png)
+![7](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/7.png)
 
 > 图7：通过所提出的方法和其他算法计算的兴趣点检测结果示例；请注意，（a）基于 σ = 0.03 和 n = 2 呈现；（a） Ground truth； (b) 我们的结果； (c) 聚类显著性[25]； (d) HKS [73]； (e) 网格显著性 [6]； (f) Salient points [49]； (g) Scale dependent [75]； (h) 3D-SIFT [74]；(i)  3D Harris [72]
 
@@ -262,13 +262,13 @@ FNE、FPE 和 WME 都是介于 0 和 1 之间的度量；算法执行的 FNE、F
 
 最初，候选视点是通过对一个限定点云模型的球体进行均匀采样来生成的[79]，在[12]之后，半径被设置为紧密边界球体长度的两倍；点云模型的候选视点数量约为  2600 个。对于点云模型 P，S 表示模型 P 中每个点的显著性检测结果；给定视点 v，令 F(v) 表示从视点 v 可见的点集。根据 [6]，我们定义视点  v 的显著性值总和为：
 
-![1.17](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.17.png)
+![1.17](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.17.png)
 
 其中 U(v) 表示视点 v 的总显著值，p<sub>i</sub> 表示从视点 v 可见的点。
 
 对于每个候选视点，计算 U(v)。然后我们找到最佳视点 v<sub>p</sub> = argmax U(v)。请注意，我们没有执行梯度下降法来找到 [6]  中描述的局部最大值，因为候选视点的数量已经足够了。图8给出了基于所提出方法的视点选择结果、[80] 中报告的语义驱动视点选择结果和 [12]  中报告的基于感兴趣表面区域的视点选择结果之间的比较。
 
-![8](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\8.png)
+![8](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/8.png)
 
 > 图 8： 视点选择结果；对比从上到下，所提出方法的结果、[80]中报告的结果和[12]中报告的结果
 
@@ -282,11 +282,11 @@ FNE、FPE 和 WME 都是介于 0 和 1 之间的度量；算法执行的 FNE、F
 
 给定网格模型 M 上的顶点 v = [v<sub>x</sub>,v<sub>y</sub>, v<sub>z</sub>, 1]<sup>T</sup>，令 F 表示入射到顶点 v 的三角形平面集合，S 为网格模型 M  的显著性检测结果。对于平面 f ∈ F，由方程 ax + by + cz + d = 0 和 a<sub>2</sub> + b<sub>2</sub>  + c<sub>2</sub>  = 1 定义，平面 f 可以描述为 f  = [a, b, c, d]<sup>T</sup> 。按照[6]中的方法，网格模型M的显著性结果S用于指导简化收缩过程；顶点 v 的误差定义为：
 
-![1](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.18.png)
+![1](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.18.png)
 
 其中 W(v) 是在顶点 v 处放大的显著性值 S(v)，放大算子指定为：
 
-![1](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\1.19.png)
+![1](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/1.19.png)
 
 其中λ是放大参数，α是控制要放大的显著点范围的阈值。请注意，在本文中，λ 设置为 100，α 设置为论文 [6] 中的前 30% 显著性值。
 
@@ -294,7 +294,7 @@ FNE、FPE 和 WME 都是介于 0 和 1 之间的度量；算法执行的 FNE、F
 
 在计算出每对的最优收缩目标 $\overline{v}$ 以及收缩成本后，所有对都使用收缩值的成本按升序排序，成本最小的对 (v<sub>1</sub>, v<sub>2</sub>,) 被收缩.然后更新所有涉及顶点v<sub>1</sub> 的对的成本，并重复整个收缩过程，直到剩余顶点的数量满足需要；图9展示了使用不同方法的简化结果的比较。从第一行可以看出，与 QEM [82]  方法相比，由显著性引导的简化结果（第三、第四和第五列）在龙的面部和脚部保留了更好的细节；更具体地说，我们的方法保留了更好的面部和脚部细节，并且分布在龙身上的顶点数量最少；根据第二行，与[6]中提出的网格显著性算法相比，所提出的方法在龙的眼睛、嘴巴和角上保留了更多的顶点，并且在不使用模型的拓扑结构的情况下达到了与[50]相当的结果。
 
-![9](C:\Users\LD\Desktop\毕业设计\毕设论文翻译\IMG\9.png)
+![9](https://github.com/GRF-Sunomikp31/DynamicPointCloudVideoSaliencyDetection/blob/main/Data%20(submitted)/2.PaperTranslation/IMG/9.png)
 
 > 图9：简化结果对比[50] 中报告了左侧四列；从左到右：龙模型（30k个顶点），使用QEM[82]算法生成的简化结果（2500个顶点），由[6]（2500个顶点）和[50]（2500个顶点）引导的简化结果，使用所提出方法的简化结果（2500 个顶点）；(a) 原始模型；(b) Qslim [82]；(c) 网格显著性[6]； (d) 全局稀有性 [50]； (e) 我们的结果
 
